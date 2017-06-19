@@ -10,6 +10,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -18,6 +21,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "artist-markup",
     "quantity"
 })
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Cart {
 
     /**
@@ -144,4 +150,7 @@ public class Cart {
         this.additionalProperties.put(name, value);
     }
 
+    public double caculatePrice() {
+        return 0;
+    }
 }
