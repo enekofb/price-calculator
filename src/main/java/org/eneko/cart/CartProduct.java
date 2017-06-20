@@ -150,8 +150,4 @@ public class CartProduct {
         this.additionalProperties.put(name, value);
     }
 
-    public double caculatePrice() {
-        return 0;
-    }
-
 }

@@ -9,7 +9,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class CartService {
 
-    public Cart newCartFromFile(String cartFilename) {
-        return null;
+    @Autowired
+    PriceService priceService;
+
+    public double calculatePrice(Cart cart) {
+        return 0;
     }
 }
