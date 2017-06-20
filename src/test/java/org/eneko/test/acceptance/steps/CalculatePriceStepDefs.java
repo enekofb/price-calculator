@@ -5,6 +5,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.eneko.cart.Cart;
+import org.eneko.cart.CartService;
 import org.eneko.prices.pricecalculator.PriceCalculator;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -20,6 +21,8 @@ public class CalculatePriceStepDefs {
     private PriceCalculator priceCalculator;
     private Cart cart;
     private double cartPrice;
+
+    private CartService cartService;
 
     @Given("^exists a price calculator with prices \"([^\"]*)\" and cart \"([^\"]*)\"$")
     public void exists_a_price_calculator_with_prices_and_cart(String pricesSchemaFilename, String cartSchemaFilename) throws Throwable {
@@ -48,4 +51,10 @@ public class CalculatePriceStepDefs {
         assertTrue(cartPrice == expectedPrice);
     }
 
+    @Given("^the prices by \"([^\"]*)\" and an cart by file \"([^\"]*)\"$")
+    public void thePricesByAndAnCartByFile(String pricesFilename, String cartFilename) throws Throwable {
+        Cart cart = cartService.newCartFromFile(cartFilename);
+        cartPrice  = cartService.calculatePrice(cart);
+        assertTrue(cartPrice >= 0.0);
+    }
 }
