@@ -3,7 +3,6 @@ package org.eneko.test.unit.prices;
 import org.eneko.prices.pricecalculator.PriceCalculator;
 import org.junit.Test;
 
-//import static com.sun.org.apache.xerces.internal.util.PropertyState.is;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNull.notNullValue;
