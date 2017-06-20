@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
 
 })
-public class CartOptions {
+public class CartProductOptions {
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
