@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Collection;
 @NoArgsConstructor
 public class Cart {
 
-    Collection<CartProduct> products;
+    private Collection<CartProduct> products;
 
     public int getNumProducts() {
         return products.size();
