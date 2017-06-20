@@ -5,8 +5,10 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.eneko.cart.Cart;
+import org.eneko.cart.CartFactory;
 import org.eneko.cart.CartService;
 import org.eneko.prices.pricecalculator.PriceCalculator;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -18,6 +20,8 @@ import static org.junit.Assert.assertTrue;
  */
 public class CalculatePriceStepDefs {
 
+    @Autowired
+    private CartFactory cartFactory;
     private PriceCalculator priceCalculator;
     private Cart cart;
     private double cartPrice;
@@ -26,23 +30,23 @@ public class CalculatePriceStepDefs {
 
     @Given("^exists a price calculator with prices \"([^\"]*)\" and cart \"([^\"]*)\"$")
     public void exists_a_price_calculator_with_prices_and_cart(String pricesSchemaFilename, String cartSchemaFilename) throws Throwable {
-        priceCalculator = PriceCalculator.builder().
-                basePriceSchemaFilename(pricesSchemaFilename).
-                cartSchemaFilename(cartSchemaFilename)
-                .build();
-        assertThat(priceCalculator,is(notNullValue()));
+//        priceCalculator = PriceCalculator.builder().
+//                basePriceSchemaFilename(pricesSchemaFilename).
+//                cartSchemaFilename(cartSchemaFilename)
+//                .build();
+//        assertThat(priceCalculator,is(notNullValue()));
     }
 
 
     @Given("^I have an empty cart$")
     public void i_have_an_empty_cart() throws Throwable {
-        cart = Cart.builder().build();
-        assertThat(cart,is(notNullValue()));
+//        cart = Cart.builder().build();
+//        assertThat(cart,is(notNullValue()));
     }
 
     @When("^I calculate its price$")
     public void i_calculate_its_price() throws Throwable {
-        cartPrice = cart.caculatePrice();
+        cartPrice = cart.calculatePrice();
         assertTrue(cartPrice >= 0.0);
     }
 
@@ -53,8 +57,8 @@ public class CalculatePriceStepDefs {
 
     @Given("^the prices by \"([^\"]*)\" and an cart by file \"([^\"]*)\"$")
     public void thePricesByAndAnCartByFile(String pricesFilename, String cartFilename) throws Throwable {
-        Cart cart = cartService.newCartFromFile(cartFilename);
-        cartPrice  = cartService.calculatePrice(cart);
+        Cart cart = cartFactory.newCartFromFile(cartFilename);
+        cartPrice  = cart.calculatePrice();
         assertTrue(cartPrice >= 0.0);
     }
 }
