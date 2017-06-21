@@ -12,7 +12,17 @@ public class CartService {
     @Autowired
     PriceService priceService;
 
+    @Autowired
+    CartFactory cartFactory;
+
     public double calculatePrice(Cart cart) {
-        return 0;
+        return cart.getProducts().stream().
+                map(product -> priceService.calculatePrice(product)).
+                reduce(0.0, Double::sum);
+    }
+
+    public Cart newCartFromFile(String cartFilename) {
+
+        return null;
     }
 }
