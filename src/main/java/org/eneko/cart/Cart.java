@@ -24,4 +24,8 @@ public class Cart {
     public double calculatePrice() {
         return 0.0;
     }
+
+    public Collection<CartProduct> getProducts() {
+        return products;
+    }
 }

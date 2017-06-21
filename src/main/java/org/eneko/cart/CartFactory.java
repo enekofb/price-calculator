@@ -1,6 +1,7 @@
 package org.eneko.cart;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.NoArgsConstructor;
 import org.eneko.cart.utils.JsonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -19,9 +20,10 @@ import java.util.Collections;
  * Created by eneko on 20/06/2017.
  */
 @Component
+@NoArgsConstructor
 public class CartFactory {
 
-    JsonValidator cartValidator = new JsonValidator("/cart-schema.json");
+    private JsonValidator cartValidator = new JsonValidator("/cart-schema.json");
 
     public Cart newCartFromFile(String cartFilename) {
         try {

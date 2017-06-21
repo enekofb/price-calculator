@@ -7,6 +7,7 @@ import cucumber.api.java.en.When;
 import org.eneko.cart.Cart;
 import org.eneko.cart.CartFactory;
 import org.eneko.cart.CartService;
+import org.eneko.cart.PriceService;
 import org.eneko.prices.pricecalculator.PriceCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,33 +21,43 @@ import static org.junit.Assert.assertTrue;
  */
 public class CalculatePriceStepDefs {
 
-    @Autowired
-    private CartFactory cartFactory;
-    private PriceCalculator priceCalculator;
-    private Cart cart;
-    private double cartPrice;
-
     private CartService cartService;
 
-    @Given("^exists a price calculator with prices \"([^\"]*)\" and cart \"([^\"]*)\"$")
-    public void exists_a_price_calculator_with_prices_and_cart(String pricesSchemaFilename, String cartSchemaFilename) throws Throwable {
-//        priceCalculator = PriceCalculator.builder().
-//                basePriceSchemaFilename(pricesSchemaFilename).
-//                cartSchemaFilename(cartSchemaFilename)
-//                .build();
-//        assertThat(priceCalculator,is(notNullValue()));
+    private PriceService priceService;
+
+    private Cart cart;
+
+    private double cartPrice;
+
+
+    @Given("^a price service with schema \"([^\"]*)\" and base prices \"([^\"]*)\"$")
+    public void a_price_service_with_schema_and_base_prices(String priceSchemaFilename, String pricesFilename) throws Throwable {
+        priceService = new PriceService(priceSchemaFilename,pricesFilename);
+        assertThat(priceService,notNullValue());
+    }
+
+    @Given("^a cart service with schema \"([^\"]*)\"$")
+    public void a_cart_service_with_schema(String arg1) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @Given("^I have an cart by file \"([^\"]*)\"$")
+    public void i_have_an_cart_by_file(String arg1) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
     }
 
 
     @Given("^I have an empty cart$")
     public void i_have_an_empty_cart() throws Throwable {
-//        cart = Cart.builder().build();
-//        assertThat(cart,is(notNullValue()));
+        cart = Cart.builder().build();
+        assertThat(cart,is(notNullValue()));
     }
 
     @When("^I calculate its price$")
     public void i_calculate_its_price() throws Throwable {
-        cartPrice = cart.calculatePrice();
+        cartPrice = cartService.calculatePrice(cart);
         assertTrue(cartPrice >= 0.0);
     }
 
@@ -57,8 +68,10 @@ public class CalculatePriceStepDefs {
 
     @Given("^the prices by \"([^\"]*)\" and an cart by file \"([^\"]*)\"$")
     public void thePricesByAndAnCartByFile(String pricesFilename, String cartFilename) throws Throwable {
-        Cart cart = cartFactory.newCartFromFile(cartFilename);
-        cartPrice  = cart.calculatePrice();
+//        priceService.setBasePricesFromFrile(pricesFilename);
+//        cartService.setPriceService(priceService);
+        Cart cart = cartService.newCartFromFile(cartFilename);
+        double cartPrice  = cartService.calculatePrice(cart);
         assertTrue(cartPrice >= 0.0);
     }
 }
