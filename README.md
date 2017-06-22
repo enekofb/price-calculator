@@ -35,3 +35,20 @@ We currently have more than 1,000 base prices. Make sure the running time of the
 Write tested, production-quality code.
 Make sure a human can understand how to run your program.
 You will extend this program in subsequent interview steps.
+
+*Refactor pending*
+
+- Split concerns so domain entities has data layer information and presentation. There should be
+different objects.
+
+*On install*
+
+- Run ElasticSearch Docker container
+
+
+docker run -p 9200:9200 -p 9300:9300 elasticsearch:2.4 -Des.node.name="elastic"
+
+
+http://localhost:9200/product/price/_search?default_operator=AND&q=product-type:hoodie+options.size:small+options.colour:white&pretty
+
+https://www.mkyong.com/spring-boot/spring-boot-spring-data-elasticsearch-example/

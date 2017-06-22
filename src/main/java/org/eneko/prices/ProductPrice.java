@@ -1,5 +1,5 @@
 
-package org.eneko.prices.pricecalculator;
+package org.eneko.prices;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +10,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -17,10 +22,31 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "options",
     "base-price"
 })
-public class BasePrice {
+@Document(indexName = "product",type = "price")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class ProductPrice {
+
+
+    @Id
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setAdditionalProperties(Map<String, Object> additionalProperties) {
+        this.additionalProperties = additionalProperties;
+    }
 
     /**
-     * 
+     *
+
      * (Required)
      * 
      */
@@ -33,7 +59,7 @@ public class BasePrice {
      */
     @JsonProperty("options")
     @JsonPropertyDescription("Key-value pairs of strings. If the value is an array, the base-price applies to all the strings in that array.")
-    private BasePriceOptions options;
+    private ProductPriceOptions options;
     /**
      * The base price for this product-type and option combination in cents.
      * (Required)
@@ -71,7 +97,7 @@ public class BasePrice {
      * 
      */
     @JsonProperty("options")
-    public BasePriceOptions getOptions() {
+    public ProductPriceOptions getOptions() {
         return options;
     }
 
@@ -81,7 +107,7 @@ public class BasePrice {
      * 
      */
     @JsonProperty("options")
-    public void setOptions(BasePriceOptions options) {
+    public void setOptions(ProductPriceOptions options) {
         this.options = options;
     }
 
@@ -91,7 +117,7 @@ public class BasePrice {
      * 
      */
     @JsonProperty("base-price")
-    public Integer getBasePrice() {
+    public Integer  getBasePrice() {
         return basePrice;
     }
 

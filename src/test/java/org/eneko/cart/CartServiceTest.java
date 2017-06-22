@@ -50,7 +50,7 @@ public class CartServiceTest {
     @Test
     public void canCalculatePriceForSingleProductCart(){
         CartProduct cartProduct = mock(CartProduct.class);
-        when(priceService.calculatePrice(cartProduct)).thenReturn(10.0);
+        when(priceService.calculatePrice(cartProduct)).thenReturn(10);
         when(cart.getProducts()).thenReturn(Collections.singletonList(cartProduct));
         double cartPrice = cartService.calculatePrice(cart);
         assertThat("Invalid price calculated",cartPrice==10.0);
@@ -61,9 +61,9 @@ public class CartServiceTest {
         CartProduct cartProduct = mock(CartProduct.class);
         CartProduct cartProduct2 = mock(CartProduct.class);
         CartProduct cartProduct3 = mock(CartProduct.class);
-        when(priceService.calculatePrice(cartProduct)).thenReturn(1.0);
-        when(priceService.calculatePrice(cartProduct2)).thenReturn(2.0);
-        when(priceService.calculatePrice(cartProduct3)).thenReturn(3.0);
+        when(priceService.calculatePrice(cartProduct)).thenReturn(1);
+        when(priceService.calculatePrice(cartProduct2)).thenReturn(2);
+        when(priceService.calculatePrice(cartProduct3)).thenReturn(3);
         when(cart.getProducts()).thenReturn(Arrays.asList(cartProduct,cartProduct2,cartProduct3));
         double cartPrice = cartService.calculatePrice(cart);
         assertThat("Invalid price calculated",cartPrice==6.0);

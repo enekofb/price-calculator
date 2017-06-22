@@ -2,8 +2,12 @@ package org.eneko.test.unit.prices;
 
 import org.eneko.cart.Cart;
 import org.eneko.cart.CartFactory;
+import org.eneko.cart.utils.JsonValidator;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Component;
@@ -19,12 +23,18 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class CartFactoryTest {
 
     @Autowired
-    CartFactory factory;
+    private CartFactory cartFactory;
+
+    @Test
+    public void canCreateEmptyCart(){
+        Cart cart = cartFactory.newCart();
+        assertThat("has one element",cart.getNumProducts()==0);
+    }
 
     @Test
     public void canCreateCartFromFileWithOneElement(){
         String singleElementCartFilename = "/cart-4560.json";
-        Cart cart = factory.newCartFromFile(singleElementCartFilename);
+        Cart cart = cartFactory.newCartFromFile(singleElementCartFilename);
         assertThat("has one element",cart.getNumProducts()==1);
     }
 }
