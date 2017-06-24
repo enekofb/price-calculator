@@ -3,6 +3,7 @@ package org.eneko.test.acceptance.steps;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.elasticsearch.action.fieldstats.FieldStats;
 import org.eneko.PriceCalculatorApplication;
 import org.eneko.cart.Cart;
 import org.eneko.cart.CartService;
@@ -34,7 +35,7 @@ public class CalculatePriceStepDefs {
 
     private Cart cart;
 
-    private int cartPrice;
+    private double cartPrice;
 
     @Given("^a price service the following base prices \"([^\"]*)\"$")
     public void a_price_service_the_following_base_prices(String basePricesFilename) throws Throwable {
@@ -42,9 +43,8 @@ public class CalculatePriceStepDefs {
         productPrices.forEach( productPrice -> assertThat(productPrice.getProductType(),notNullValue()));
     }
 
-
-    @Given("^I have an cart by file \"([^\"]*)\"$")
-    public void i_have_an_cart_by_file(String cartFilename) throws Throwable {
+    @Given("^I have a cart given by \"([^\"]*)\"$")
+    public void i_have_a_cart_given_by_cart_json(String cartFilename) throws Throwable {
         cart = cartService.newCartFromFile(cartFilename);
         assertThat(cart,notNullValue());
     }
@@ -58,12 +58,11 @@ public class CalculatePriceStepDefs {
     @When("^I calculate its price$")
     public void i_calculate_its_price() throws Throwable {
         cartPrice = cartService.calculatePrice(cart);
-        assertTrue(cartPrice >= 0);
+        assertTrue(cartPrice >= 0.0);
     }
 
-    @Then("^Its prices is (\\d+)$")
-    public void its_prices_is(int expectedPrice) throws Throwable {
-        assertThat(cartPrice,equalTo(expectedPrice));
+    @Then("^Its prices is \"([^\"]*)\"$")
+    public void its_prices_is(String expectedPrice) throws Throwable {
+        assertTrue(cartPrice == Double.valueOf(expectedPrice));
     }
-
 }

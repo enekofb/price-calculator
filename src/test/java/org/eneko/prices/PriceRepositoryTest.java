@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.*;
@@ -32,17 +33,20 @@ public class PriceRepositoryTest {
     }
 
     @Test
-    public void canFindProductByProductTypeAndProperties(){
-        Map<String, Object> additionalPropertiesMap= new HashMap<String, Object>();
-        additionalPropertiesMap.put("colour","white");
-        additionalPropertiesMap.put("size","small");
+    public void canFindProductByProductTypeAndAllValidOptions(){
+        Map<String, Object> options= new HashMap<String, Object>();
+        options.put("colour","white");
+        options.put("size","small");
+        Set<String> validOptions= new HashSet<>();
+        validOptions.add("size");
+        validOptions.add("colour");
         ProductPrice productPrice = ProductPrice.builder()
                 .productType("type")
-                .additionalProperties(additionalPropertiesMap)
+                .options(options)
                 .build();
         ProductPrice productPriceSaved = priceRepository.save(productPrice);
-        ProductPrice foundProductPrice = priceRepository.findProductByProductTypeAndProperties("type", additionalPropertiesMap);
-        assertThat(foundProductPrice,equalTo(productPriceSaved));
+        ProductPrice foundProductPrice = priceRepository.findByProductTypeAndOptions("type",options,validOptions);
+        assertTrue(foundProductPrice.equals(productPriceSaved));
     }
 
 

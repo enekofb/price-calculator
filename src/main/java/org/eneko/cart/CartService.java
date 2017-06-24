@@ -19,10 +19,10 @@ public class CartService {
     @Autowired
     CartFactory cartFactory;
 
-    public int calculatePrice(Cart cart) {
+    public double calculatePrice(Cart cart) {
         return cart.getProducts().stream().
                 map(product -> priceService.calculatePrice(product)).
-                reduce(0, Integer::sum);
+                reduce(0.0, Double::sum);
     }
 
     public Cart newCartFromFile(String cartFilename) {
