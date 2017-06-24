@@ -1,11 +1,9 @@
-package org.eneko.cart;
+package org.eneko.test.unit.cart;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 /**

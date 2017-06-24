@@ -1,4 +1,4 @@
-package org.eneko.cart;
+package org.eneko.test.unit.cart;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,17 +29,15 @@ public class PriceService {
     private Map<String, Set<String>> validOptionsByProductType = Collections.EMPTY_MAP;
 
 
-    private static final DecimalFormat DF2 = new DecimalFormat(".##");
-
     //Calculated by (base_price + round(base_price * artist_markup)) * quantity
-    public double calculatePrice(CartProduct cartProduct) {
+    public int calculatePrice(CartProduct cartProduct) {
         ProductPrice productPrice = priceRepository.
                 findByProductTypeAndOptions(cartProduct.getProductType(),
                         cartProduct.getOptions(),
                         this.validOptionsByProductType.get(cartProduct.getProductType()));
-        Double artist = Double.valueOf(DF2.format(productPrice.getBasePrice() * cartProduct.getArtistMarkup() * 0.01));
-        double productSellingPrice = (productPrice.getBasePrice()
-                + (artist))
+        int artistMargin = (int) Math.round(productPrice.getBasePrice() * cartProduct.getArtistMarkup() * 0.01);
+        int productSellingPrice = (productPrice.getBasePrice()
+                + (artistMargin))
                 * cartProduct.getQuantity();
         return productSellingPrice;
     }

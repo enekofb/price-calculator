@@ -1,4 +1,4 @@
-package org.eneko.cart;
+package org.eneko.test.unit.cart;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -19,10 +19,10 @@ public class CartService {
     @Autowired
     CartFactory cartFactory;
 
-    public double calculatePrice(Cart cart) {
+    public int calculatePrice(Cart cart) {
         return cart.getProducts().stream().
                 map(product -> priceService.calculatePrice(product)).
-                reduce(0.0, Double::sum);
+                reduce(0, Integer::sum);
     }
 
     public Cart newCartFromFile(String cartFilename) {

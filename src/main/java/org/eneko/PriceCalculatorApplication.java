@@ -1,6 +1,6 @@
 package org.eneko;
 
-import org.eneko.cart.utils.JsonValidator;
+import org.eneko.test.unit.cart.utils.JsonValidator;
 import org.eneko.prices.PriceRepositoryCustom;
 import org.eneko.prices.PriceRepositoryCustomImpl;
 import org.springframework.beans.factory.annotation.Qualifier;
