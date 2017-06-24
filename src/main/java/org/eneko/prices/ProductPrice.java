@@ -1,11 +1,6 @@
 
 package org.eneko.prices;
 
-import java.util.HashMap;
-import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
@@ -15,6 +10,8 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+
+import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -28,7 +25,6 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @NoArgsConstructor
 public class ProductPrice {
 
-
     @Id
     private String id;
 
@@ -38,10 +34,6 @@ public class ProductPrice {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public void setAdditionalProperties(Map<String, Object> additionalProperties) {
-        this.additionalProperties = additionalProperties;
     }
 
     /**
@@ -59,7 +51,7 @@ public class ProductPrice {
      */
     @JsonProperty("options")
     @JsonPropertyDescription("Key-value pairs of strings. If the value is an array, the base-price applies to all the strings in that array.")
-    private ProductPriceOptions options;
+    private Map<String,Object> options;
     /**
      * The base price for this product-type and option combination in cents.
      * (Required)
@@ -68,8 +60,6 @@ public class ProductPrice {
     @JsonProperty("base-price")
     @JsonPropertyDescription("The base price for this product-type and option combination in cents.")
     private Integer basePrice;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 
@@ -97,7 +87,7 @@ public class ProductPrice {
      * 
      */
     @JsonProperty("options")
-    public ProductPriceOptions getOptions() {
+    public Map<String,Object> getOptions() {
         return options;
     }
 
@@ -107,7 +97,7 @@ public class ProductPrice {
      * 
      */
     @JsonProperty("options")
-    public void setOptions(ProductPriceOptions options) {
+    public void setOptions(Map<String,Object> options) {
         this.options = options;
     }
 
@@ -131,14 +121,26 @@ public class ProductPrice {
         this.basePrice = basePrice;
     }
 
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ProductPrice that = (ProductPrice) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (productType != null ? !productType.equals(that.productType) : that.productType != null) return false;
+        if (options != null ? !options.equals(that.options) : that.options != null) return false;
+        return basePrice != null ? basePrice.equals(that.basePrice) : that.basePrice == null;
+
     }
 
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (productType != null ? productType.hashCode() : 0);
+        result = 31 * result + (options != null ? options.hashCode() : 0);
+        result = 31 * result + (basePrice != null ? basePrice.hashCode() : 0);
+        return result;
     }
-
 }

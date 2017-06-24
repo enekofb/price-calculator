@@ -1,7 +1,8 @@
 #Price Calculator
 
 *Semantics*
-Create a simple price calculator command-line program. In order to make this exercise programming language agnostic, the inputs and outputs are defined as JSON.
+Create a simple price calculator command-line program. 
+In order to make this exercise programming language agnostic, the inputs and outputs are defined as JSON.
 
 *Input*
 Your command-line program should take two arguments:
@@ -52,3 +53,9 @@ docker run -p 9200:9200 -p 9300:9300 elasticsearch:2.4 -Des.node.name="elastic"
 http://localhost:9200/product/price/_search?default_operator=AND&q=product-type:hoodie+options.size:small+options.colour:white&pretty
 
 https://www.mkyong.com/spring-boot/spring-boot-spring-data-elasticsearch-example/
+
+*Assumptions*
+
+- Ignore some options for the cart type that does not applies to the price.
+- First approach is to do an intersection of product by type so you just want to mach those properties
+in the intersection between car-product options and price options

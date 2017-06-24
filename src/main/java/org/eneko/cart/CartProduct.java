@@ -41,7 +41,7 @@ public class CartProduct {
      */
     @JsonProperty("options")
     @JsonPropertyDescription("Key-value pairs of strings.")
-    private CartProductOptions options;
+    private Map<String,Object> options;
     /**
      * The artist markup in percent, for example 20 represents a 20% markup.
      * (Required)
@@ -58,8 +58,7 @@ public class CartProduct {
     @JsonProperty("quantity")
     @JsonPropertyDescription("The quantity of this item.")
     private Integer quantity;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
 
     /**
      * 
@@ -87,7 +86,7 @@ public class CartProduct {
      * 
      */
     @JsonProperty("options")
-    public CartProductOptions getOptions() {
+    public Map<String,Object> getOptions() {
         return options;
     }
 
@@ -97,7 +96,7 @@ public class CartProduct {
      * 
      */
     @JsonProperty("options")
-    public void setOptions(CartProductOptions options) {
+    public void setOptions(Map<String,Object> options) {
         this.options = options;
     }
 
@@ -139,16 +138,6 @@ public class CartProduct {
     @JsonProperty("quantity")
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 
 }
