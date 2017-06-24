@@ -24,19 +24,6 @@ public class PriceRepositoryCustomImpl implements PriceRepositoryCustom{
     @Autowired
     ElasticsearchTemplate esTemplate;
 
-//    eneko@eneko-XPS-15-9550:~$ curl -XGET 'localhost:9200/product/price/_search?pretty' -H 'Content-Type: application/json' -d'
-//    {
-//        "query": {
-//        "bool": {
-//            "must": [
-//            { "match": { "product-type":{"query":  "hoodie","operator":"and" }}},
-//            { "match": { "options.size":{"query":"small","operator":"and"}}}, { "match": { "options.colour":{"query":"white","operator":"and"}}}
-//      ]
-//        }
-//    }
-//    }
-//'
-
     @Override
     //TODO: refactor me, I want to be simpler
     public ProductPrice findByProductTypeAndOptions(String productType, Map<String, Object> options, Set<String> validOptions) {

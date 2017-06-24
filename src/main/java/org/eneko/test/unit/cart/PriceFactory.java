@@ -1,9 +1,9 @@
-package org.eneko.cart;
+package org.eneko.test.unit.cart;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.NoArgsConstructor;
-import org.eneko.cart.utils.JsonValidator;
+import org.eneko.test.unit.cart.utils.JsonValidator;
 import org.eneko.prices.ProductPrice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

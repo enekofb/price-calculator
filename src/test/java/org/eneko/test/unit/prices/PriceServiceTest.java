@@ -1,19 +1,18 @@
-package org.eneko.cart;
+package org.eneko.test.unit.prices;
 
-import org.eneko.PriceCalculatorApplication;
 import org.eneko.prices.PriceRepository;
 import org.eneko.prices.ProductPrice;
+import org.eneko.test.unit.cart.CartProduct;
+import org.eneko.test.unit.cart.PriceService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsNull.notNullValue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -22,7 +21,6 @@ import static org.mockito.Mockito.when;
  * Created by eneko on 21/06/17.
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = PriceCalculatorApplication.class)
 public class PriceServiceTest {
 
     PriceService priceService;
@@ -51,7 +49,7 @@ public class PriceServiceTest {
                 .validOptionsByProductType(validOptionsByProductType)
                 .priceRepository(priceRepository)
                 .build();
-        double price = priceService.calculatePrice(product);
+        int price = priceService.calculatePrice(product);
 
         assertThat("price is not 101 but "+price,price ==101);
     }
