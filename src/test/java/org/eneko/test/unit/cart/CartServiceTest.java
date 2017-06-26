@@ -1,5 +1,6 @@
 package org.eneko.test.unit.cart;
 
+import org.eneko.cart.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

@@ -1,5 +1,5 @@
 
-package org.eneko.test.unit.cart;
+package org.eneko.cart;
 
 import java.util.HashMap;
 import java.util.Map;

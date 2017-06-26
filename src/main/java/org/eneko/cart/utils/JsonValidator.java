@@ -1,4 +1,4 @@
-package org.eneko.test.unit.cart.utils;
+package org.eneko.cart.utils;
 
 import jdk.nashorn.internal.parser.JSONParser;
 import org.everit.json.schema.Schema;

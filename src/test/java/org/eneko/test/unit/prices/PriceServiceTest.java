@@ -2,8 +2,8 @@ package org.eneko.test.unit.prices;
 
 import org.eneko.prices.PriceRepository;
 import org.eneko.prices.ProductPrice;
-import org.eneko.test.unit.cart.CartProduct;
-import org.eneko.test.unit.cart.PriceService;
+import org.eneko.cart.CartProduct;
+import org.eneko.cart.PriceService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;

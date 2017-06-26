@@ -1,4 +1,4 @@
-package org.eneko.test.unit.cart;
+package org.eneko.cart;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

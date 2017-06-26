@@ -1,4 +1,4 @@
-package org.eneko.test.unit.cart;
+package org.eneko.cart;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,7 +8,6 @@ import org.eneko.prices.ProductPrice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.text.DecimalFormat;
 import java.util.*;
 
 /**

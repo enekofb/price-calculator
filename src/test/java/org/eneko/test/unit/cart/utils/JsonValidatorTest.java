@@ -1,9 +1,9 @@
 package org.eneko.test.unit.cart.utils;
 
+import org.eneko.cart.utils.JsonValidator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;

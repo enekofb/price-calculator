@@ -1,11 +1,10 @@
-package org.eneko.test.unit.cart;
+package org.eneko.cart;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
-import org.eneko.test.unit.cart.utils.JsonValidator;
+import org.eneko.cart.utils.JsonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
